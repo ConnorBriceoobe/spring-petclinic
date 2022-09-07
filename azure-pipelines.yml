@@ -18,10 +18,16 @@ steps:
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
 
-jobs:  
+jobs:
 - deployment: VMDeploy
   displayName: web
+  pool:
+    vmImage: 'Ubuntu-latest'
   environment:
-    name:  <environment name>
+    name: <environment name>
     resourceType: VirtualMachine
-    tags: web
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo my first deployment
